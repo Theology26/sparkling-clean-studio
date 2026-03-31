@@ -19,7 +19,10 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <a href="#hero" className="flex items-center gap-2 text-primary font-bold text-lg">
-          <Sparkles className="text-accent" size={24} />
+          <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-lg border-2 border-accent/50" style={{ boxShadow: '0 4px 15px hsl(var(--primary) / 0.3), inset 0 1px 2px rgba(255,255,255,0.4)' }}>
+            <img src={logoImg} alt="Sparkling Cleaners Logo" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 rounded-full" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)' }} />
+          </div>
           <span>Sparkling Cleaners</span>
         </a>
 
