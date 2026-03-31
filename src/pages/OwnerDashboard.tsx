@@ -81,7 +81,7 @@ const OwnerDashboard = () => {
     return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
   }).length ?? 0;
 
-  const completedOrders = statusCounts.siap_ambil ?? 0;
+  const completedOrders = statusCounts["siap_ambil"] ?? 0;
   const activeOrders = totalOrders - completedOrders;
   const lowStockItems = inventory?.filter((i) => i.quantity <= i.min_stock) ?? [];
 

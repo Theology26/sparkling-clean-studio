@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { LogOut, Plus, RefreshCw, Sparkles, Camera, Calendar, ChevronDown, X, Image } from "lucide-react";
+import { LogOut, Plus, RefreshCw, Sparkles, Camera, Calendar, X, Image } from "lucide-react";
 
 type OrderStatus = "diterima" | "cuci" | "kering" | "finishing" | "siap_ambil";
 
