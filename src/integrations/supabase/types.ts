@@ -47,11 +47,42 @@ export type Database = {
         }
         Relationships: []
       }
+      inventory: {
+        Row: {
+          created_at: string
+          id: string
+          item_name: string
+          min_stock: number
+          quantity: number
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_name: string
+          min_stock?: number
+          quantity?: number
+          unit?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_name?: string
+          min_stock?: number
+          quantity?: number
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string
           customer_name: string
           customer_phone: string
+          estimated_completion: string | null
           id: string
           notes: string | null
           order_code: string
@@ -66,6 +97,7 @@ export type Database = {
           created_at?: string
           customer_name: string
           customer_phone: string
+          estimated_completion?: string | null
           id?: string
           notes?: string | null
           order_code: string
@@ -80,6 +112,7 @@ export type Database = {
           created_at?: string
           customer_name?: string
           customer_phone?: string
+          estimated_completion?: string | null
           id?: string
           notes?: string | null
           order_code?: string
