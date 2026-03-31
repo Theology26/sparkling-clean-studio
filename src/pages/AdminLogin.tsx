@@ -10,14 +10,32 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const redirectByRole = async (userId: string) => {
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+
+    const userRoles = roles?.map((r) => r.role) ?? [];
+
+    if (userRoles.includes("owner")) {
+      navigate("/admin/owner");
+    } else if (userRoles.includes("admin")) {
+      navigate("/admin/dashboard");
+    } else {
+      setError("Akun Anda tidak memiliki akses admin.");
+      await supabase.auth.signOut();
+    }
+  };
+
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        navigate("/admin/dashboard");
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session && event === "SIGNED_IN") {
+        await redirectByRole(session.user.id);
       }
     });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate("/admin/dashboard");
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session) await redirectByRole(session.user.id);
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
@@ -51,6 +69,10 @@ const AdminLogin = () => {
             {loading ? "Masuk..." : "Masuk"}
           </button>
         </form>
+
+        <a href="/" className="block text-center text-xs text-muted-foreground mt-4 hover:text-primary transition">
+          ← Kembali ke Beranda
+        </a>
       </div>
     </div>
   );
